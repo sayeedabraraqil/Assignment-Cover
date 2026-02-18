@@ -1,25 +1,54 @@
 "use client"
 
-import { signIn, signOut, useSession } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Home() {
 
- const { data: session } = useSession()
+const { data: session } = useSession()
 
- if (!session)
-   return (
-     <button onClick={() => signIn("google")}>
-       Login with Google
-     </button>
-   )
+if (!session) {
+return (
+<div style={{textAlign:"center", marginTop:"200px"}}>
+<button onClick={() => signIn("google")}>
+Login with Google </button> </div>
+)
+}
 
- return (
-   <>
-     <h1>Welcome {session.user.name}</h1>
+return (
 
-     <button onClick={() => signOut()}>
-       Logout
-     </button>
-   </>
- )
+```
+<div style={{
+  background:"white",
+  color:"black",
+  padding:"40px",
+  width:"600px",
+  margin:"50px auto",
+  border:"1px solid black"
+}}>
+
+  <h1 style={{textAlign:"center"}}>
+    Assignment Cover Page
+  </h1>
+
+  <hr/>
+
+  <p><b>Name:</b> {session.user.name}</p>
+
+  <p><b>Email:</b> {session.user.email}</p>
+
+  <p><b>Course:</b> Web Engineering</p>
+
+  <p><b>Assignment:</b> Google Login Assignment</p>
+
+  <br/>
+
+  <button onClick={() => signOut()}>
+    Logout
+  </button>
+
+</div>
+```
+
+)
+
 }
